@@ -25,6 +25,7 @@ button:focus {
   outline: none;
 }
 
+/* HEADER */
 header {
   width: 100%;
   height: 4rem;
@@ -58,3 +59,48 @@ header button:active {
   border-color: var(--main-hover-color);
   color: black;
 }
+
+/* FOOTER */
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--main-element-color);
+}
+
+footer p {
+  position: relative;
+  margin: 0;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.easteregg {
+  position: absolute;
+  min-width: 220px;
+  padding: 20px 15px;
+  background-color: var(--main-hover-color);
+  transform: translateY(-120%);
+  transform: translate(-18%, -118%);
+  border-radius: 15px;
+  font-size: 1rem;
+  color: black;
+}
+
+.easteregg::after {
+  position: absolute;
+  background-color: var(--main-hover-color);
+  content: "";
+  width: 24px;
+  height: 24px;
+  bottom: -6px;
+  left: 14px;
+  transform: rotate(45deg);
+}
+
+/* MODAL */
