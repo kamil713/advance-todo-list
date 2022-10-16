@@ -1,14 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ToDo List</title>
+  <title>Todo List</title>
 </head>
-<body>
-  
-  
 
+<body>
+  <!-- template for "more info" button -->
+  <template id="tooltip">
+    <h2>More Info</h2>
+    <p></p>
+  </template>
+
+  <div id="backdrop"></div>
+  <div class="modal card" id="add-modal">
+    <div class="modal__content">
+      <label for="title">Task Title</label>
+      <input type="text" name="title" id="title" />
+      <label for="description">Short Description</label>
+      <input type="text" name="description" id="description" />
+      <label for="extra-info">More Info</label>
+      <input type="text" name="extra-info" id="extra-info" />
+    </div>
+    <div class="modal__actions">
+      <button class="btn btn--passive">Cancel</button>
+      <button class="btn btn--success">Add</button>
+    </div>
+  </div>
+
+  <header id="main-header">
+    <h1>Todo List</h1>
+    <button>ADD TASK</button>
+  </header>
+
+  <section id="active-tasks">
+    <header>
+      <h2>Active Tasks</h2>
+    </header>
+    <ul>
+      <li id="t1" data-extra-info="Lorem dwadwadaw." class="task">
+        <h2>Buy Groceries</h2>
+        <p>Don't forget to pick up groceries today.</p>
+        <button class="alt">More Info</button>
+        <button>Finish</button>
+      </li>
+    </ul>
+  </section>
+
+  <section id="finished-tasks">
+    <header>
+      <h2>Finished Tasks</h2>
+    </header>
+    <ul>
+      <li id="t2" data-extra-info="Lorem dwadwadaw." class="task">
+        <h2>Book Hotel</h2>
+        <p>
+          dwadwadwadwadawdawdwad dwa
+        </p>
+        <button class="alt">More Info</button>
+        <button>Activate</button>
+      </li>
+    </ul>
+  </section>
+
+  <footer>
+    <button>Give me a star <sup>*</sup></button>
+  </footer>
 </body>
+
 </html>
