@@ -323,8 +323,44 @@ class TaskList {
 	}
 }
 
+/* EASTEREGG */
+class EasterEgg {
+	constructor() {
+		this.footerEmoji = document.querySelector('footer p');
+	}
+
+	createEGTooltip = (e) => {
+		const tooltipParent = e.target;
+		const tooltipText = e.target.dataset.easterEgg;
+
+		const newTooltip = document.createElement('span');
+		newTooltip.innerHTML = tooltipText;
+		newTooltip.className = 'easteregg';
+
+		tooltipParent.appendChild(newTooltip);
+	};
+
+	removeEasteregg = (e) => {
+		const easteregg = e.target.querySelector('.easteregg');
+		if (easteregg) {
+			easteregg.remove();
+		}
+	};
+
+	init() {
+		this.footerEmoji.addEventListener('mouseover', this.createEGTooltip);
+		this.footerEmoji.addEventListener('mouseleave', this.removeEasteregg);
+		this.footerEmoji.addEventListener('click', () => {
+			window.open('https://github.com/kamil713/advance-todo-list');
+		});
+	}
+}
+
 class App {
 	static init() {
+		const modal = new Modal();
+		modal.init();
+
 		const activeTasksList = new TaskList('active');
 		const finishedTasksList = new TaskList('finished');
 		activeTasksList.setSwitchHandlerFunction(
@@ -334,36 +370,9 @@ class App {
 			activeTasksList.addTask.bind(activeTasksList)
 		);
 
-		const modal = new Modal();
-		modal.init();
+		const easterEgg = new EasterEgg();
+		easterEgg.init();
 	}
 }
 
 App.init();
-
-/* EASTEREGG */
-const footerEmoji = document.querySelector('footer p');
-
-const createEGTooltip = (e) => {
-	const tooltipParent = e.target;
-	const tooltipText = e.target.dataset.easterEgg;
-
-	const newTooltip = document.createElement('span');
-	newTooltip.innerHTML = tooltipText;
-	newTooltip.className = 'easteregg';
-
-	tooltipParent.appendChild(newTooltip);
-};
-
-const removeEasteregg = (e) => {
-	const easteregg = e.target.querySelector('.easteregg');
-	if (easteregg) {
-		easteregg.remove();
-	}
-};
-
-footerEmoji.addEventListener('mouseover', createEGTooltip);
-footerEmoji.addEventListener('mouseleave', removeEasteregg);
-footerEmoji.addEventListener('click', () => {
-	window.open('https://github.com/kamil713/advance-todo-list');
-});
