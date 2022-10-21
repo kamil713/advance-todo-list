@@ -230,10 +230,6 @@ class TaskItem {
 			event.dataTransfer.setData('text/plain', this.id);
 			event.dataTransfer.effectAllowed = 'move';
 		});
-
-		item.addEventListener('dragend', event => {
-			console.log(event);
-		})
 	}
 
 	connectMoreInfoButton() {
@@ -275,7 +271,6 @@ class TaskList {
 				new TaskItem(taskItem.id, this.switchTask.bind(this), this.type)
 			);
 		}
-		console.log(this.tasks);
 		this.connectDroppable();
 	}
 
@@ -284,7 +279,7 @@ class TaskList {
 
 		list.addEventListener('dragenter', (event) => {
 			if (event.dataTransfer.types[0] === 'text/plain') {
-				list.parentElement.classList.add('droppable');
+				list.classList.add('droppable');
 				event.preventDefault();
 			}
 		});
@@ -297,7 +292,7 @@ class TaskList {
 
 		list.addEventListener('dragleave', (event) => {
 			if (event.relatedTarget.closest(`#${this.type}-tasks ul`) !== list) {
-				list.parentElement.classList.remove('droppable');
+				list.classList.remove('droppable');
 			}
 		});
 
@@ -310,7 +305,7 @@ class TaskList {
 				.getElementById(taskId)
 				.querySelector('button:last-of-type')
 				.click();
-			list.parentElement.classList.remove('droppable');
+			list.classList.remove('droppable');
 		});
 	}
 
