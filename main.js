@@ -19,6 +19,7 @@ class Modal {
 		newTaskElement.id = id;
 		newTaskElement.dataset.extraInfo = extraInfo;
 		newTaskElement.className = 'task';
+		newTaskElement.setAttribute('draggable', 'true')
 		newTaskElement.innerHTML = `
 			<h2>${title}</h2>
 			<p>${desc}</p>
@@ -117,7 +118,6 @@ class Modal {
 	}
 }
 
-
 /* TODO LOGIC */
 class DOMHelper {
 	static clearEventListeners(element) {
@@ -204,6 +204,7 @@ class TaskItem {
 		this.updateTaskListsHandler = updateTaskListsFunction;
 		this.connectMoreInfoButton();
 		this.connectSwitchButton(type);
+		this.connectDrag();
 	}
 
 	showMoreInfoHandler() {
@@ -221,6 +222,18 @@ class TaskItem {
 		);
 		tooltip.attach();
 		this.hasActiveTooltip = true;
+	}
+
+	connectDrag() {
+		const item = document.getElementById(this.id);
+		item.addEventListener('dragstart', (event) => {
+			event.dataTransfer.setData('text/plain', this.id);
+			event.dataTransfer.effectAllowed = 'move';
+		});
+
+		item.addEventListener('dragend', event => {
+			console.log(event);
+		})
 	}
 
 	connectMoreInfoButton() {
@@ -263,6 +276,42 @@ class TaskList {
 			);
 		}
 		console.log(this.tasks);
+		this.connectDroppable();
+	}
+
+	connectDroppable() {
+		const list = document.querySelector(`#${this.type}-tasks ul`);
+
+		list.addEventListener('dragenter', (event) => {
+			if (event.dataTransfer.types[0] === 'text/plain') {
+				list.parentElement.classList.add('droppable');
+				event.preventDefault();
+			}
+		});
+
+		list.addEventListener('dragover', (event) => {
+			if (event.dataTransfer.types[0] === 'text/plain') {
+				event.preventDefault();
+			}
+		});
+
+		list.addEventListener('dragleave', (event) => {
+			if (event.relatedTarget.closest(`#${this.type}-tasks ul`) !== list) {
+				list.parentElement.classList.remove('droppable');
+			}
+		});
+
+		list.addEventListener('drop', (event) => {
+			const taskId = event.dataTransfer.getData('text/plain');
+			if (this.tasks.find((t) => t.id === taskId)) {
+				return;
+			}
+			document
+				.getElementById(taskId)
+				.querySelector('button:last-of-type')
+				.click();
+			list.parentElement.classList.remove('droppable');
+		});
 	}
 
 	setSwitchHandlerFunction(switchHandlerFunction) {
