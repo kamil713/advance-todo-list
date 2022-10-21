@@ -19,7 +19,7 @@ class Modal {
 		newTaskElement.id = id;
 		newTaskElement.dataset.extraInfo = extraInfo;
 		newTaskElement.className = 'task';
-		newTaskElement.setAttribute('draggable', 'true')
+		newTaskElement.setAttribute('draggable', 'true');
 		newTaskElement.innerHTML = `
 			<h2>${title}</h2>
 			<p>${desc}</p>
@@ -235,12 +235,10 @@ class TaskItem {
 	connectMoreInfoButton() {
 		const taskItemElement = document.getElementById(this.id);
 		const moreInfoBtn = taskItemElement.querySelector('button:first-of-type');
-		if (moreInfoBtn.getAttribute('listener') !== 'true') {
-			moreInfoBtn.addEventListener('click', () => {
-				this.showMoreInfoHandler();
-				moreInfoBtn.setAttribute('listener', 'true');
-			});
-		}
+		moreInfoBtn.addEventListener('click', () => {
+			if (taskItemElement.lastChild.className === 'task') return;
+			this.showMoreInfoHandler();
+		});
 	}
 
 	connectSwitchButton(type) {
