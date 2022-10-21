@@ -6,7 +6,9 @@
   <h1>Todo list</h1>
   
   <p>
-    
+    This project is a combination of several features from tutorials. 
+    </br>
+    It was written to practice advanced JavaScript techniques like data-attributes, tooltip, template, events and drag & drop.
   </p>
   
   
