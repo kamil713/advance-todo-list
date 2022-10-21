@@ -178,7 +178,7 @@ section button:active {
 }
 
 .droppable {
-  background: #ffe0ec;
+  background-color: rgb(252, 81, 133, 0.26)
 }
 
 #active-tasks {
